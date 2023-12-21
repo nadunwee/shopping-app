@@ -10,6 +10,17 @@ exports.getProducts = (req, res, next) => {
   });
 };
 
+exports.getProduct = (req, res, next) => {
+  const productID = req.params.productID;
+  Product.findByID(productID, (product) => {
+    res.render("shop/product-detail", {
+      pageTitle: product.title,
+      path: "/products",
+      prod: product,
+    });
+  });
+};
+
 exports.getIndex = (req, res, next) => {
   Product.fetchAll((products) => {
     res.render("shop/index", {
